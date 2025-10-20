@@ -1,14 +1,18 @@
-# To - do list developed as part of php/js/sql learning experience
+This is a Assignment Project that is ready to deploy on any Cloud IaaS instance. Intended deployment is to be done on AWS EC2.
+The Pupose of this activity is to learn to make Dockerfile and Docker Volume 
 
-View Live: https://to-do.zeabur.app/index.php
+Docker Commands to get started: 
+    
+    docker compose up -d --build
+    docker compose down -v 
+
+    the project will run on 
+    http://localhost:8080/
+    or the 
+    http://<public-ip>:8080/
+
+    make sure to set the inbound rules  :) cheers.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-
-### Deployed on Zeabur
-
-This project is powered by [Zeabur](https://zeabur.com?referralCode=Codennnn&utm_source=Codennnn). Their high-quality server services ensure the stable operation of our project. Need quality server services? Check them out via the link!
-
-[![Deployed on Zeabur](https://zeabur.com/deployed-on-zeabur-dark.svg)](https://zeabur.com?referralCode=Teosany&utm_source=Teosany)

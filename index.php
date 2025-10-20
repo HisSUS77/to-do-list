@@ -80,7 +80,7 @@ if (isset($_GET['update_task'])) {
                 }
                 ?>
                 <td class="delete">
-                    <a href='index.php?del_task=<?php echo $task->getId(); ?>' onclick="return confirm('Tu es sure?')">
+                    <a href='index.php?del_task=<?php echo $task->getId(); ?>' onclick="return confirm('Are u sure?')">
                         x</a>
                 </td>
             </tr>

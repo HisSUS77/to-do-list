@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    container_name: todo_app
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: appuser
+      DB_PASS: appuserpass
+      DB_NAME: todo_list
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: mysql:8.0
+    container_name: todo_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: todo_list
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: appuserpass
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
