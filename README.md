@@ -17,10 +17,6 @@ runs the web service using your image,
 
 consumes Docker secret for DB root password.
 
-Provision an AWS EC2 instance, install Docker, init Docker Swarm, deploy the stack with docker stack deploy.
-
-Test the app, take screenshots, write final report and include files.
-
 
 
 Docker Commands to get started: 
