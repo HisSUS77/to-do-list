@@ -1,20 +1,25 @@
 <?php
 class dataBase extends PDO {
-
-    private $_DB_HOST;
-    private $_DB_USER;
-    private $_DB_PASS;
-    private $_DB_NAME;
-
     public function __construct() {
-        $this->_DB_HOST = getenv('DB_HOST') ?: 'db';
-        $this->_DB_USER = getenv('DB_USER') ?: 'appuser';
-        $this->_DB_PASS = getenv('DB_PASS') ?: 'appuserpass';
-        $this->_DB_NAME = getenv('DB_NAME') ?: 'todo_list';
+        $db_host_file = '/run/secrets/db_host';
+        $db_user_file = '/run/secrets/db_user';
+        $db_pass_file = '/run/secrets/db_password';
+        $db_name_file = '/run/secrets/db_name';
+
+        if (file_exists($db_host_file)) {
+            $host = trim(file_get_contents($db_host_file));
+            $user = trim(file_get_contents($db_user_file));
+            $pass = trim(file_get_contents($db_pass_file));
+            $name = trim(file_get_contents($db_name_file));
+        } else {
+            $host = 'db';
+            $user = 'root';
+            $pass = 'rootpass';
+            $name = 'todo';
+        }
 
         try {
-            parent::__construct("mysql:host=$this->_DB_HOST;dbname=$this->_DB_NAME", $this->_DB_USER, $this->_DB_PASS);
-            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            parent::__construct("mysql:host=$host;dbname=$name", $user, $pass);
         } catch (PDOException $e) {
             echo "Database connection error: " . $e->getMessage();
         }
