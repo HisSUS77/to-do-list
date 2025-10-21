@@ -15,8 +15,6 @@ Write a docker-compose.yml (Compose v3+ for use with docker stack deploy) that:
 
 runs the web service using your image,
 
-runs a MongoDB service with a named volume for persistence,
-
 consumes Docker secret for DB root password.
 
 Provision an AWS EC2 instance, install Docker, init Docker Swarm, deploy the stack with docker stack deploy.
