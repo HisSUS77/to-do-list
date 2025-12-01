@@ -46,8 +46,11 @@ pipeline {
         stage('Selenium Testing') {
             steps {
                 echo 'Running Selenium Tests...'
-                sh 'docker build -t selenium-tests -f Dockerfile.selenium .'
-                sh 'docker run --rm --network host -e APP_URL=http://localhost:8081 selenium-tests'
+                sh '''
+                    cd selenium-tests
+                    pip3 install -r requirements.txt
+                    python3 test_todo.py
+                '''
             }
         }
     }

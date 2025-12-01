@@ -18,7 +18,7 @@ class ToDoListTests(unittest.TestCase):
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
         cls.driver = webdriver.Chrome(options=chrome_options)
-        cls.base_url = os.getenv('APP_URL', 'http://localhost:8080')
+        cls.base_url = os.getenv('APP_URL', 'http://localhost:8081')
         
     @classmethod
     def tearDownClass(cls):
