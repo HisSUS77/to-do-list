@@ -48,7 +48,7 @@ pipeline {
                 echo 'Running Selenium Tests...'
                 sh '''
                     cd selenium-tests
-                    pip3 install -r requirements.txt
+                    pip3 install --break-system-packages -r requirements.txt
                     python3 test_todo.py
                 '''
             }
