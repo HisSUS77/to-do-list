@@ -1,17 +1,42 @@
 <?php
 
-// Mock database class for testing
+// Mock PDO statement for testing
+class MockPDOStatement {
+    public function execute($params = []) {
+        return true;
+    }
+    
+    public function fetch($mode = null) {
+        return ['Test Task'];
+    }
+    
+    public function fetchAll($mode = null) {
+        return [];
+    }
+    
+    public function bindParam($parameter, &$variable, $data_type = null) {
+        return true;
+    }
+}
+
+// Mock database class for testing - extends PDO
 if (!class_exists('dataBase')) {
     class dataBase {
-        private $connection;
-        
         public function __construct() {
-            // Mock connection - no real DB needed for unit tests
-            $this->connection = null;
+            // Mock constructor - don't call parent PDO constructor
         }
         
-        public function getConnection() {
-            return $this->connection;
+        // Mock PDO methods
+        public function prepare($sql) {
+            return new MockPDOStatement();
+        }
+        
+        public function query($sql) {
+            return new MockPDOStatement();
+        }
+        
+        public function errorInfo() {
+            return ['00000', null, null];
         }
     }
 }
