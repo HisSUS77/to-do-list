@@ -39,7 +39,7 @@ pipeline {
                 sh 'docker-compose down || true'
                 sh 'docker-compose up -d'
                 sh 'sleep 20'
-                sh 'curl -f http://localhost:8080'
+                sh 'curl -f http://localhost:8081'
             }
         }
         
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 echo 'Running Selenium Tests...'
                 sh 'docker build -t selenium-tests -f Dockerfile.selenium .'
-                sh 'docker run --rm --network host -e APP_URL=http://localhost:8080 selenium-tests'
+                sh 'docker run --rm --network host -e APP_URL=http://localhost:8081 selenium-tests'
             }
         }
     }
