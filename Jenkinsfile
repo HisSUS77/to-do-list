@@ -36,8 +36,8 @@ pipeline {
         stage('Containerized Deployment') {
             steps {
                 echo 'Deploying with Docker Compose...'
-                sh 'docker-compose down || true'
-                sh 'docker-compose up -d'
+                sh 'docker compose down || true'
+                sh 'docker compose up -d'
                 sh 'sleep 20'
                 sh 'curl -f http://localhost:8081'
             }
@@ -57,7 +57,7 @@ pipeline {
     
     post {
         always {
-            sh 'docker-compose down || true'
+            sh 'docker compose down || true'
         }
     }
 }
