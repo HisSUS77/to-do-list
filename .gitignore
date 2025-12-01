@@ -1,0 +1,31 @@
+# PHP
+vendor/
+*.phar
+composer.lock
+
+# Testing
+test-results.txt
+phpunit.xml.dist
+.phpunit.result.cache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/

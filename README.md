@@ -1,37 +1,74 @@
-This is a Assignment Project that is ready to deploy on any Cloud IaaS instance. Intended deployment is to be done on AWS EC2.
-The Pupose of this activity is to learn to make Dockerfile and Docker Volume 
+# ToDo List - Jenkins CI/CD Assignment
 
-Assignment Guidelines:
+PHP ToDo List application with Jenkins CI/CD pipeline, Docker deployment, and automated testing.
 
-Prepare your app so it runs on a configurable port and reads DB password from environment.
+## Features
 
-Create a Dockerfile to build the web image.
+- Add, edit, delete tasks
+- Docker containerization
+- Jenkins CI/CD pipeline
+- PHPUnit unit tests
+- Selenium UI tests (4 tests)
 
-Build and push the image to Docker Hub.
+## Quick Start
 
-Prepare Docker secret(s) for DB password.
+```bash
+docker-compose up -d --build
+# Access: http://localhost:8080
+docker-compose down
+```
 
-Write a docker-compose.yml (Compose v3+ for use with docker stack deploy) that:
+## Jenkins Setup
 
-runs the web service using your image,
+### 1. Install Jenkins on EC2
+```bash
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list
+sudo apt update
+sudo apt install jenkins -y
+sudo systemctl start jenkins
+```
 
-consumes Docker secret for DB root password.
+### 2. Install Docker
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
+```
 
+### 3. Create Pipeline Job
+- New Item → Pipeline
+- SCM: Git
+- Repository: Your GitHub repo URL
+- Script Path: `Jenkinsfile`
 
+### 4. GitHub Webhook
+- Repo Settings → Webhooks → Add webhook
+- URL: `http://<jenkins-ip>:8080/github-webhook/`
+- Content: `application/json`
+- Events: Push events
 
-Docker Commands to get started: 
-    
-    docker compose up -d --build
-    docker compose down -v 
+## Pipeline Stages
 
-    the project will run on 
-    http://localhost:8080/
-    or the 
-    http://<public-ip>:8080/
+1. **Code Linting** - PHP syntax validation
+2. **Code Build** - Docker image build
+3. **Unit Testing** - PHPUnit tests (3 tests)
+4. **Containerized Deployment** - Docker Compose deployment
+5. **Selenium Testing** - UI tests (4 tests)
 
-    make sure to set the inbound rules  :) cheers.
+## Files
+
+- `Jenkinsfile` - CI/CD pipeline
+- `Dockerfile` - App container
+- `Dockerfile.selenium` - Test container
+- `docker-compose.yml` - Deployment config
+- `tests/Unit/TaskManagerTest.php` - Unit tests
+- `selenium-tests/test_todo.py` - Selenium tests
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+MIT
 
