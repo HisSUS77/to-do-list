@@ -63,7 +63,7 @@ class ToDoListTests(unittest.TestCase):
                 update_link.click()
                 time.sleep(2)
                 break
-        
+        self.assertIn("Done", row.text)  
         print("✓ Test 3: Task marked as done")
         
     def test_04_delete_task(self):
@@ -86,7 +86,7 @@ class ToDoListTests(unittest.TestCase):
                 alert.accept()
                 time.sleep(2)
                 break
-        
+        self.assertNotIn(task_name, self.driver.page_source)
         print("✓ Test 4: Task deleted")
 
 if __name__ == '__main__':
