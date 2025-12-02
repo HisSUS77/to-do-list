@@ -1,6 +1,6 @@
 <?php
 
-class taskManager extends AbstructTaskManager
+class taskManager extends AbstractTaskManager
 {
     protected $_id;
     protected $_product;
@@ -118,7 +118,7 @@ class taskManager extends AbstructTaskManager
     }
 }
 
-abstract class AbstructTaskManager
+abstract class AbstractTaskManager
 {
     abstract public function addTask(string $task);
 
